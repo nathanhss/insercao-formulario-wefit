@@ -8,8 +8,33 @@
 // };
 
 // jest.config.ts
-import { JestConfigWithTsJest, createDefaultPreset } from 'ts-jest'
+// import { JestConfigWithTsJest, createDefaultPreset } from 'ts-jest'
 
-const jestConfig: JestConfigWithTsJest = {
-  ...createDefaultPreset(),
-}
+// const jestConfig: JestConfigWithTsJest = {
+  
+//   ...createDefaultPreset(),
+// }
+
+import { Config } from "@jest/types";
+
+const config: Config.InitialOptions = {
+  automock: true,
+  collectCoverage: true,
+  collectCoverageFrom: ["src/**/*.ts"],
+  testEnvironment: "node",
+  coverageProvider: "v8",
+  coverageThreshold: {
+    global: {
+      statements: 90,
+      branches: 90,
+      functions: 90,
+      lines: 90,
+    },
+  },
+  maxConcurrency: 5,
+  preset: "ts-jest",
+  verbose: true,
+  rootDir: "./src"
+};
+
+export default config;
