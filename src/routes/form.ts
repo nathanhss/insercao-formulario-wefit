@@ -36,8 +36,6 @@ router.get("/form/fetch", (req, res) => {
 
 router.get("/form/get/:id", (req, res) => {
     try {
-        console.log(req.params);
-        
         const validData = Validate.getSchema.parse(req.params);
 
         getForm(validData.id).then((data) => {

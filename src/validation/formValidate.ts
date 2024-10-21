@@ -1,3 +1,5 @@
+import {cnpj, cpf} from 'cpf-cnpj-validator'
+
 import { z } from 'zod';
 
 const formSchema = z.object({
@@ -7,7 +9,7 @@ const formSchema = z.object({
     complement: z.string().optional(),
     confirmEmail: z.string(),
     document: z.string(),
-    email: z.string(),
+    email: z.string().email(),
     fullName: z.string(),
     legalEntity: z.number(),
     neighborhood: z.string(),
@@ -17,21 +19,24 @@ const formSchema = z.object({
     terms: z.boolean(),
     zipCode: z.string(),
 })
+.refine(data => data.email === data.confirmEmail, {
+    message: "Emails must match",
+    path: ["email", "confirmEmail"],
+})
 .refine(data => data.terms === true, {
     message: "You must accept the terms to proceed",
     path: ["terms"],
 })
 .refine(data => {
-    const documentLength = data.document.length;
-        if (data.legalEntity === 0 && documentLength !== 11) {
+        if (data.legalEntity === 0) {
+            return cpf.isValid(data.document);
+        } else if (data.legalEntity === 1) {
+            return cnpj.isValid(data.document);
+        }
+
         return false;
-        }
-        if (data.legalEntity === 1 && documentLength !== 14) {
-            return false;
-        }
-        return true;
     }, {
-    message: "Invalid document length for the selected legalEntity",
+    message: "Invalid document for the selected legalEntity",
     path: ["document"],
 });
 
