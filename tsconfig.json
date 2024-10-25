@@ -7,7 +7,6 @@
     "strictPropertyInitialization": false,
     "allowJs": true,
     "esModuleInterop": true,
-    "rootDir": "./src",
     "emitDecoratorMetadata": true,
     "types": [
       "node",

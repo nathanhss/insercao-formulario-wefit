@@ -34,7 +34,8 @@ const config: Config.InitialOptions = {
   maxConcurrency: 5,
   preset: "ts-jest",
   verbose: true,
-  rootDir: "./src"
+  rootDir: ".",
+  setupFilesAfterEnv: ['<rootDir>/singleton.ts'],
 };
 
 export default config;
