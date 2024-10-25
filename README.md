@@ -1,7 +1,5 @@
 ## Backend - Wefit
 
-Seja bem vindo ao teste de backend da Wefit.
-
 ### Para iniciar o banco de dados é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
 
     docker-compose up -D
